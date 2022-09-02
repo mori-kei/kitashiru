@@ -7,6 +7,10 @@ import { SignUp } from "./pages/SignUp";
 import { Article } from "./pages/Article";
 import { AuthProvider } from "./contexts/AuthContext";
 import {PrivateRoute} from "./utils/PrivateRouter" 
+import { Test } from "./pages/Test";
+import { Chart } from "./commponents/Chart";
+import { Header } from "./commponents/Header";
+import './CSS/Chart.css'
 function App() {
   // const [posts, setPosts] = useState([]);
   // useEffect(() => {
@@ -21,6 +25,7 @@ function App() {
     <>
       <BrowserRouter>
         <AuthProvider>
+          <Header/>
           <Routes>
           <Route
         path="secret"
@@ -28,7 +33,8 @@ function App() {
       />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/a" element={<Article/>} />
+            <Route path="/test" element={<Test/>} />
+            {/* <Route path="/chart" element={<Chart/>} /> */}
             {/* <Route path="/article" element={<Article />} /> */}
           </Routes>
         </AuthProvider>

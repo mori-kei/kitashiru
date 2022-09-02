@@ -1,0 +1,42 @@
+@media screen and (max-width: 1024px) {
+ 
+
+  #content{
+  z-index:2;
+  width:85%;
+  padding: 1em;
+  background:#fff;
+  
+}
+#content div{
+  width: 100% !important;
+
+}#content div svg {
+  width: 130%;
+  margin: 0 auto;
+  margin-top: -100px;
+}
+.culture{
+  margin-top: -200px;
+}
+.flex-parent{
+  display: flex;
+}
+}@media screen and (min-width: 1024px) {
+
+
+  #content{
+  z-index:2;
+  width:85%;
+  padding: 1em;
+  background:#fff;
+  
+}
+#content div{
+  width: 100% !important;
+
+}#content div svg {
+  width: 100%;
+  margin: 0 auto;
+}
+}

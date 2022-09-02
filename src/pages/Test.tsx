@@ -1,40 +1,110 @@
 import React, { useState, useEffect } from "react";
-import { TextField } from "@mui/material";
+import { MenuItem, TextField } from "@mui/material";
 import { ResultButton } from "../UIkit/ResultButton";
 import { Chart } from "../commponents/Chart";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+import styled from "@emotion/styled";
+import { width } from "@mui/system";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+const Question = styled.div`
+  color: "#333";
+  margin: 0 auto;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  border-radius: 30px;
+  @media (max-width: 460px) {
+    margin-bottom: 30px;
+    width: 85%;
+    padding: 20px 15px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    & h1 {
+      font-size: 24px;
+    }
+    & p {
+      font-size: 16px;
+    }
+  }
+  @media (min-width: 460px) {
+    max-width: 1280px;
+    width: 80%;
+    margin-bottom: 20px;
+    padding: 20px 30px;
+  }
+`;
+const ModalInner = styled.div`
+  @media (min-width: 460px) {
+    max-width: 1280px;
+    width: 80%;
+
+    margin-bottom: 20px;
+    padding: 20px 30px;
+    background-color: #fff;
+    margin: 0 auto;
+    transform: "translate(-50%, -50%)";
+    border-radius: 20px;
+  }
+  @media (max-width: 460px) {
+    width: 80%;
+
+    margin-bottom: 20px;
+    padding: 20px 30px;
+    background-color: #fff;
+    margin: 0 auto;
+    transform: "translate(-50%, -50%)";
+    border-radius: 20px;
+  }
+`;
+const style = {
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 80,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 export const Test: React.FC = () => {
+  const [open, setOpen] = React.useState(true);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   //回答結果state
   // Q1
-  const [q01Fam, setQ01Fam] = useState<number>(100);
-  const [q01Inno, setQ01Inno] = useState<number>(0);
-  const [q01Mar, setQ01Mar] = useState<number>(0);
-  const [q01Bure, setQ01Bure] = useState<number>(0);
+  const [q01Fam, setQ01Fam] = useState<string>("0");
+  const [q01Inno, setQ01Inno] = useState<string>("0");
+  const [q01Mar, setQ01Mar] = useState<string>("0");
+  const [q01Bure, setQ01Bure] = useState<string>("0");
   // Q2
-  const [q02Fam, setQ02Fam] = useState<number>(0);
-  const [q02Inno, setQ02Inno] = useState<number>(0);
-  const [q02Mar, setQ02Mar] = useState<number>(0);
-  const [q02Bure, setQ02Bure] = useState<number>(0);
+  const [q02Fam, setQ02Fam] = useState<string>("0");
+  const [q02Inno, setQ02Inno] = useState<string>("0");
+  const [q02Mar, setQ02Mar] = useState<string>("0");
+  const [q02Bure, setQ02Bure] = useState<string>("0");
   // Q3
-  const [q03Fam, setQ03Fam] = useState<number>(0);
-  const [q03Inno, setQ03Inno] = useState<number>(0);
-  const [q03Mar, setQ03Mar] = useState<number>(0);
-  const [q03Bure, setQ03Bure] = useState<number>(0);
+  const [q03Fam, setQ03Fam] = useState<string>("0");
+  const [q03Inno, setQ03Inno] = useState<string>("0");
+  const [q03Mar, setQ03Mar] = useState<string>("0");
+  const [q03Bure, setQ03Bure] = useState<string>("0");
   // Q4
-  const [q04Fam, setQ04Fam] = useState<number>(0);
-  const [q04Inno, setQ04Inno] = useState<number>(0);
-  const [q04Mar, setQ04Mar] = useState<number>(0);
-  const [q04Bure, setQ04Bure] = useState<number>(0);
+  const [q04Fam, setQ04Fam] = useState<string>("0");
+  const [q04Inno, setQ04Inno] = useState<string>("0");
+  const [q04Mar, setQ04Mar] = useState<string>("0");
+  const [q04Bure, setQ04Bure] = useState<string>("0");
   // Q5
-  const [q05Fam, setQ05Fam] = useState<number>(0);
-  const [q05Inno, setQ05Inno] = useState<number>(0);
-  const [q05Mar, setQ05Mar] = useState<number>(0);
-  const [q05Bure, setQ05Bure] = useState<number>(0);
+  const [q05Fam, setQ05Fam] = useState<string>("0");
+  const [q05Inno, setQ05Inno] = useState<string>("0");
+  const [q05Mar, setQ05Mar] = useState<string>("0");
+  const [q05Bure, setQ05Bure] = useState<string>("0");
   // Q6
-  const [q06Fam, setQ06Fam] = useState<number>(0);
-  const [q06Inno, setQ06Inno] = useState<number>(0);
-  const [q06Mar, setQ06Mar] = useState<number>(0);
-  const [q06Bure, setQ06Bure] = useState<number>(0);
+  const [q06Fam, setQ06Fam] = useState<string>("0");
+  const [q06Inno, setQ06Inno] = useState<string>("0");
+  const [q06Mar, setQ06Mar] = useState<string>("0");
+  const [q06Bure, setQ06Bure] = useState<string>("0");
 
   //バリデーションチェックstate
   const [firstQues, setFirstQues] = useState(0);
@@ -61,7 +131,7 @@ export const Test: React.FC = () => {
       Number(q01Fam) + Number(q01Inno) + Number(q01Mar) + Number(q01Bure)
     );
   }, [q01Fam, q01Inno, q01Mar, q01Bure]);
-  
+
   //問2のバリデーション（合計値が100であるかチェック）
   useEffect(() => {
     setSecondQues(
@@ -162,10 +232,35 @@ export const Test: React.FC = () => {
   const closeRuleModal = () => {
     setRuleShow(false);
   };
+  //組織文化の合計に関する部分
+  const [culture, setCulture] = useState<number>(0);
+  const CultureNumber = [
+    {
+      value: "1",
+      label: "家族文化",
+    },
+    {
+      value: "2",
+      label: "イノベーション文化",
+    },
+    {
+      value: "3",
+      label: "マーケット文化",
+    },
+    {
+      value: "4",
+      label: "官僚文化",
+    },
+  ];
+  const CultureChange = (e: SelectChangeEvent<number>) => {
+    setCulture(Number(e.target.value));
+  };
 
+
+  
   return (
     <div className="">
-      <div>
+      <Question>
         <div>
           <h1>1.顕著にみられる特徴</h1>
           <p>
@@ -175,7 +270,7 @@ export const Test: React.FC = () => {
             variant="outlined"
             type="number"
             onChange={(e) => {
-              setQ01Fam(Number(e.target.value));
+              setQ01Fam(e.target.value);
             }}
             value={q01Fam}
             size="small"
@@ -188,7 +283,7 @@ export const Test: React.FC = () => {
           <TextField
             variant="outlined"
             type="number"
-            onChange={(e) => setQ01Inno(Number(e.target.value))}
+            onChange={(e) => setQ01Inno(e.target.value)}
             value={q01Inno}
             size="small"
           />
@@ -200,7 +295,7 @@ export const Test: React.FC = () => {
           <TextField
             variant="outlined"
             type="number"
-            onChange={(e) => setQ01Mar(Number(e.target.value))}
+            onChange={(e) => setQ01Mar(e.target.value)}
             value={q01Mar}
             size="small"
           />
@@ -212,13 +307,13 @@ export const Test: React.FC = () => {
           <TextField
             variant="outlined"
             type="number"
-            onChange={(e) => setQ01Bure(Number(e.target.value))}
+            onChange={(e) => setQ01Bure(e.target.value)}
             value={q01Bure}
             size="small"
           />
         </div>
-      </div>
-      <div>
+      </Question>
+      <Question>
         <h1>2.リーダーシップスタイル</h1>
         <div>
           <p>
@@ -228,7 +323,7 @@ export const Test: React.FC = () => {
             variant="outlined"
             type="number"
             onChange={(e) => {
-              setQ02Fam(Number(e.target.value));
+              setQ02Fam(e.target.value);
             }}
             value={q02Fam}
             size="small"
@@ -241,7 +336,7 @@ export const Test: React.FC = () => {
           <TextField
             variant="outlined"
             type="number"
-            onChange={(e) => setQ02Inno(Number(e.target.value))}
+            onChange={(e) => setQ02Inno(e.target.value)}
             value={q02Inno}
             size="small"
           />
@@ -253,7 +348,7 @@ export const Test: React.FC = () => {
           <TextField
             variant="outlined"
             type="number"
-            onChange={(e) => setQ02Mar(Number(e.target.value))}
+            onChange={(e) => setQ02Mar(e.target.value)}
             value={q02Mar}
             size="small"
           />
@@ -265,13 +360,13 @@ export const Test: React.FC = () => {
           <TextField
             variant="outlined"
             type="number"
-            onChange={(e) => setQ02Bure(Number(e.target.value))}
+            onChange={(e) => setQ02Bure(e.target.value)}
             value={q02Bure}
             size="small"
           />
         </div>
-      </div>
-      <div>
+      </Question>
+      <Question>
         <h1>3.従業員管理</h1>
         <div>
           <p>
@@ -281,7 +376,7 @@ export const Test: React.FC = () => {
             variant="outlined"
             type="number"
             onChange={(e) => {
-              setQ03Fam(Number(e.target.value));
+              setQ03Fam(e.target.value);
             }}
             value={q03Fam}
             size="small"
@@ -294,7 +389,7 @@ export const Test: React.FC = () => {
           <TextField
             variant="outlined"
             type="number"
-            onChange={(e) => setQ03Inno(Number(e.target.value))}
+            onChange={(e) => setQ03Inno(e.target.value)}
             value={q03Inno}
             size="small"
           />
@@ -306,7 +401,7 @@ export const Test: React.FC = () => {
           <TextField
             variant="outlined"
             type="number"
-            onChange={(e) => setQ03Mar(Number(e.target.value))}
+            onChange={(e) => setQ03Mar(e.target.value)}
             value={q03Mar}
             size="small"
           />
@@ -318,13 +413,13 @@ export const Test: React.FC = () => {
           <TextField
             variant="outlined"
             type="number"
-            onChange={(e) => setQ03Bure(Number(e.target.value))}
+            onChange={(e) => setQ03Bure(e.target.value)}
             value={q03Bure}
             size="small"
           />
         </div>
-      </div>
-      <div>
+      </Question>
+      <Question>
         <h1>4.組織を団結させるもの</h1>
         <div>
           <p>
@@ -334,7 +429,7 @@ export const Test: React.FC = () => {
             variant="outlined"
             type="number"
             onChange={(e) => {
-              setQ04Fam(Number(e.target.value));
+              setQ04Fam(e.target.value);
             }}
             value={q04Fam}
             size="small"
@@ -347,7 +442,7 @@ export const Test: React.FC = () => {
           <TextField
             variant="outlined"
             type="number"
-            onChange={(e) => setQ04Inno(Number(e.target.value))}
+            onChange={(e) => setQ04Inno(e.target.value)}
             value={q04Inno}
             size="small"
           />
@@ -359,7 +454,7 @@ export const Test: React.FC = () => {
           <TextField
             variant="outlined"
             type="number"
-            onChange={(e) => setQ04Mar(Number(e.target.value))}
+            onChange={(e) => setQ04Mar(e.target.value)}
             value={q04Mar}
             size="small"
           />
@@ -371,13 +466,13 @@ export const Test: React.FC = () => {
           <TextField
             variant="outlined"
             type="number"
-            onChange={(e) => setQ04Bure(Number(e.target.value))}
+            onChange={(e) => setQ04Bure(e.target.value)}
             value={q04Bure}
             size="small"
           />
         </div>
-      </div>
-      <div>
+      </Question>
+      <Question>
         <h1>5.戦略的に重視するもの</h1>
         <div>
           <p>
@@ -387,7 +482,7 @@ export const Test: React.FC = () => {
             variant="outlined"
             type="number"
             onChange={(e) => {
-              setQ05Fam(Number(e.target.value));
+              setQ05Fam(e.target.value);
             }}
             value={q05Fam}
             size="small"
@@ -400,7 +495,7 @@ export const Test: React.FC = () => {
           <TextField
             variant="outlined"
             type="number"
-            onChange={(e) => setQ05Inno(Number(e.target.value))}
+            onChange={(e) => setQ05Inno(e.target.value)}
             value={q05Inno}
             size="small"
           />
@@ -412,7 +507,7 @@ export const Test: React.FC = () => {
           <TextField
             variant="outlined"
             type="number"
-            onChange={(e) => setQ05Mar(Number(e.target.value))}
+            onChange={(e) => setQ05Mar(e.target.value)}
             value={q05Mar}
             size="small"
           />
@@ -424,13 +519,13 @@ export const Test: React.FC = () => {
           <TextField
             variant="outlined"
             type="number"
-            onChange={(e) => setQ05Bure(Number(e.target.value))}
+            onChange={(e) => setQ05Bure(e.target.value)}
             value={q05Bure}
             size="small"
           />
         </div>
-      </div>
-      <div>
+      </Question>
+      <Question>
         <h1>6.成功の基準</h1>
         <div>
           <p>
@@ -440,7 +535,7 @@ export const Test: React.FC = () => {
             variant="outlined"
             type="number"
             onChange={(e) => {
-              setQ06Fam(Number(e.target.value));
+              setQ06Fam(e.target.value);
             }}
             value={q06Fam}
             size="small"
@@ -453,7 +548,7 @@ export const Test: React.FC = () => {
           <TextField
             variant="outlined"
             type="number"
-            onChange={(e) => setQ06Inno(Number(e.target.value))}
+            onChange={(e) => setQ06Inno(e.target.value)}
             value={q06Inno}
             size="small"
           />
@@ -465,7 +560,7 @@ export const Test: React.FC = () => {
           <TextField
             variant="outlined"
             type="number"
-            onChange={(e) => setQ06Mar(Number(e.target.value))}
+            onChange={(e) => setQ06Mar(e.target.value)}
             value={q06Mar}
             size="small"
           />
@@ -477,30 +572,67 @@ export const Test: React.FC = () => {
           <TextField
             variant="outlined"
             type="number"
-            onChange={(e) => setQ06Bure(Number(e.target.value))}
+            onChange={(e) => setQ06Bure(e.target.value)}
             value={q06Bure}
             size="small"
           />
         </div>
-      </div>
-      <ResultButton 
-         firstQues={firstQues}
-         secondQues={secondQues}
-         thirdQues={thirdQues}
-         fourthQues={fourthQues}
-         fifthQues={fifthQues}
-         sixthQues={sixthQues}
-         openModal={openModal}
-         trueText="結果を確認する"
-         falseText="合計値が100になっていない質問があります"
-      />
-      <Chart 
-       resultFam={resultFam}
-       resultInno={resultInno}
-       resultMar={resultMar}
-       resultBure={resultBure}
-      />
+      </Question>
+      {/* <ResultButton
+        firstQues={firstQues}
+        secondQues={secondQues}
+        thirdQues={thirdQues}
+        fourthQues={fourthQues}
+        fifthQues={fifthQues}
+        sixthQues={sixthQues}
+        openModal={openModal}
+        trueText="結果を確認する"
+        falseText="合計値が100になっていない質問があります"
+      /> */}
+      {firstQues === 100 &&
+      secondQues === 100 &&
+      thirdQues === 100 &&
+      fourthQues === 100 &&
+      fifthQues === 100 &&
+      sixthQues === 100 ? (
+        <Button onClick={handleOpen}>結果を見る</Button>
+      ) : null}
+      <Button onClick={handleOpen}>結果を見る</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <ModalInner>
+          <Chart
+            resultFam={resultFam}
+            resultInno={resultInno}
+            resultMar={resultMar}
+            resultBure={resultBure}
+          />
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">
+                最も得点の高い組織文化を選択してください
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={culture}
+                label="Age"
+                onChange={CultureChange}
+              >
+                {CultureNumber.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+        </ModalInner>
+      </Modal>
     </div>
-    
   );
 };
