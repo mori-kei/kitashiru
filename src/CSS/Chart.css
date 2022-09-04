@@ -32,11 +32,14 @@
   background:#fff;
   
 }
+.flex-parent{
+  display: flex;
+}
 #content div{
   width: 100% !important;
 
 }#content div svg {
-  width: 100%;
+  width: 100%;  
   margin: 0 auto;
 }
 }

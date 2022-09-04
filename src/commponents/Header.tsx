@@ -30,10 +30,10 @@ export const Header: React.FC = () => {
           <Button color="inherit">企業を見る</Button>
           {currentUser ? (
             <Button color="inherit" onClick={clickSignOut}>
-              Logout
+              ログアウト
             </Button>
           ) : (
-            <Button color="inherit">LogIn</Button>
+            <Button color="inherit">ログイン</Button>
           )}
         </Toolbar>
       </AppBar>

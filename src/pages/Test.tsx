@@ -11,6 +11,12 @@ import { width } from "@mui/system";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import { useAuth } from "../contexts/AuthContext";
+import { getAuth } from "firebase/auth";
+import { Send } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 const Question = styled.div`
   color: "#333";
   margin: 0 auto;
@@ -35,6 +41,19 @@ const Question = styled.div`
     padding: 20px 30px;
   }
 `;
+const ButtonBox = styled.div`
+   @media (min-width: 460px) {
+    & button {
+      width:100%;
+    }
+   }
+   @media (max-width: 460px) {
+    & button {
+      width:100%;
+      margin:0 auto;
+    }
+   }
+`
 const ModalInner = styled.div`
   @media (min-width: 460px) {
     max-width: 1280px;
@@ -46,6 +65,18 @@ const ModalInner = styled.div`
     margin: 0 auto;
     transform: "translate(-50%, -50%)";
     border-radius: 20px;
+    & div {
+      
+      & .button-box {
+        width:100%;
+        margin:0 auto;
+        margin-top:10px;
+        & button {
+          margin:0 auto;
+          width:100%;
+        }
+      }
+    }
   }
   @media (max-width: 460px) {
     width: 80%;
@@ -70,8 +101,10 @@ const style = {
   p: 4,
 };
 
-export const Test: React.FC = () => {
-  const [open, setOpen] = React.useState(true);
+export const Test = () => {
+  const { currentUser } = useAuth();
+  const navigate = useNavigate()
+  const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   //回答結果state
@@ -255,9 +288,27 @@ export const Test: React.FC = () => {
   const CultureChange = (e: SelectChangeEvent<number>) => {
     setCulture(Number(e.target.value));
   };
+  const user = getAuth().currentUser;
+  console.log(user);
+  const handleSubmit = async (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    if (user) {
+      const docUid = user.uid;
+      console.log(docUid)
+      const userDocumentRef = doc(db, "users", user.uid);
+      await setDoc(userDocumentRef, {
+        uid: user.uid,
+        culture:culture,
+        resultFam:resultFam,
+        resultInno:resultInno,
+        resultMar:resultMar,
+        resultBure:resultBure,
+      });
+      navigate('/')
+    }
+   
+  };
 
-
-  
   return (
     <div className="">
       <Question>
@@ -589,15 +640,16 @@ export const Test: React.FC = () => {
         trueText="結果を確認する"
         falseText="合計値が100になっていない質問があります"
       /> */}
+      <ButtonBox>
       {firstQues === 100 &&
       secondQues === 100 &&
       thirdQues === 100 &&
       fourthQues === 100 &&
       fifthQues === 100 &&
       sixthQues === 100 ? (
-        <Button onClick={handleOpen}>結果を見る</Button>
-      ) : null}
-      <Button onClick={handleOpen}>結果を見る</Button>
+        <Button variant="contained" onClick={handleOpen}>結果を見る</Button>
+      ) : <Button variant="outlined" color="error">合計値が100になっていない質問があります</Button>}
+      </ButtonBox>
       <Modal
         open={open}
         onClose={handleClose}
@@ -630,6 +682,10 @@ export const Test: React.FC = () => {
                 ))}
               </Select>
             </FormControl>
+            <div className="button-box">
+            <Button variant="contained" onClick={handleSubmit} endIcon={<Send />}>診断結果を保存</Button>
+            </div>
+            
           </Box>
         </ModalInner>
       </Modal>
