@@ -6,11 +6,19 @@ import { SignIn } from "./pages/SignIn";
 import { SignUp } from "./pages/SignUp";
 import { Article } from "./pages/Article";
 import { AuthProvider } from "./contexts/AuthContext";
-import {PrivateRoute} from "./utils/PrivateRouter" 
+import { PrivateRoute } from "./utils/PrivateRouter";
 import { Test } from "./pages/Test";
 import { Chart } from "./commponents/Chart";
 import { Header } from "./commponents/Header";
-import './CSS/Chart.css'
+
+import "./CSS/Chart.css";
+import "./CSS/reset.css";
+import { Home } from "./pages/Home";
+import { Company } from "./pages/Company";
+import { Companies } from "./pages/Companies";
+import Posts from "./pages/Posts";
+import Post from "./pages/post";
+import { CompanyIndex } from "./pages/CompanyIndex";
 function App() {
   // const [posts, setPosts] = useState([]);
   // useEffect(() => {
@@ -25,15 +33,22 @@ function App() {
     <>
       <BrowserRouter>
         <AuthProvider>
-          <Header/>
+          <Header />
           <Routes>
-          <Route
-        path="secret"
-        element={<PrivateRoute children={<Article />} />}
-      />
+            <Route path="test" element={<PrivateRoute children={<Test />} />} />
             <Route path="/signin" element={<SignIn />} />
+            <Route path="/" element={<Home />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/test" element={<Test/>} />
+            {/* <Route path="/company/:id" element={<Company />} /> */}
+            <Route path="/companies" element={<Companies />}>
+            <Route index element={<CompanyIndex/>} />
+            <Route path=":companyId" element={<Company/>} />
+            </Route>
+            <Route path="/posts" element={<Posts />}>
+              <Route path=":postId" element={<Post />} />
+            </Route>
+            {/* <Route path="/post" element={<Companies />} /> */}
+            {/* <Route path="/test" element={<Test/>} /> */}
             {/* <Route path="/chart" element={<Chart/>} /> */}
             {/* <Route path="/article" element={<Article />} /> */}
           </Routes>

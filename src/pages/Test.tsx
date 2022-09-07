@@ -17,6 +17,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { getAuth } from "firebase/auth";
 import { Send } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { TestRule } from "./TestRule";
 const Question = styled.div`
   color: "#333";
   margin: 0 auto;
@@ -27,8 +28,12 @@ const Question = styled.div`
     width: 85%;
     padding: 20px 15px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    & div {
+      margin-bottom: 10px;
+    }
     & h1 {
       font-size: 24px;
+      margin-bottom: 10px;
     }
     & p {
       font-size: 16px;
@@ -89,24 +94,19 @@ const ModalInner = styled.div`
     border-radius: 20px;
   }
 `;
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 80,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+
 
 export const Test = () => {
   const { currentUser } = useAuth();
   const navigate = useNavigate()
+  //回答結果のモーダルのstateと関数
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  //ルール説明のモーダルのstateと関数
+  const [ruleOpen,setRuleOpen] = useState(true);
+  const hadleRuleOpen = () => setRuleOpen(true);
+  const handleRuleClose = () => setRuleOpen(false)
   //回答結果state
   // Q1
   const [q01Fam, setQ01Fam] = useState<string>("0");
@@ -650,6 +650,18 @@ export const Test = () => {
         <Button variant="contained" onClick={handleOpen}>結果を見る</Button>
       ) : <Button variant="outlined" color="error">合計値が100になっていない質問があります</Button>}
       </ButtonBox>
+      
+      <Modal
+        open={ruleOpen}
+        onClose={handleRuleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+      <TestRule
+        setRuleOpen={setRuleOpen}
+      />
+
+      </Modal>
       <Modal
         open={open}
         onClose={handleClose}

@@ -27,7 +27,7 @@ export const Header: React.FC = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             きたしる
           </Typography>
-          <Button color="inherit">企業を見る</Button>
+          <Button onClick={() => navigate('/')} color="inherit">企業を見る</Button>
           {currentUser ? (
             <Button color="inherit" onClick={clickSignOut}>
               ログアウト
