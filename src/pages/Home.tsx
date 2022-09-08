@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { db } from "../firebase";
 
 export const Home = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   type companyData = {
-    id ?:string
+    id?: string;
     capital?: string;
     companyName?: string;
     companyNumber?: number;
@@ -19,22 +19,27 @@ export const Home = () => {
     numberOfEmpoloyees?: number;
     place?: string;
   };
-  const handleClick = (params:any) => {
-    navigate('/company',{state:params})
-  }
+  const handleClick = (params: any) => {
+    navigate("/company", { state: params });
+  };
   const [families, setFamilies] = useState<companyData[]>([]);
   useEffect(() => {
     const familiesCollectionRef = collection(db, "family");
     getDocs(familiesCollectionRef).then((querySnapshot) => {
-      setFamilies(querySnapshot.docs.map((doc) => ({ ...doc.data(),id:doc.id})));
+      setFamilies(
+        querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      );
     });
   }, []);
   return (
     <>
       <div className=""></div>
       {families.map((family) => (
-        <div key={family.id}>{family.companyName}
-        <Button onClick={() => handleClick(family.id)}>{family.id}遷移するよ</Button>
+        <div key={family.id}>
+          {family.companyName}
+          <Button onClick={() => handleClick(family.id)}>
+            {family.id}遷移するよ
+          </Button>
         </div>
       ))}
     </>

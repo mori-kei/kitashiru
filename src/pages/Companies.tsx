@@ -19,9 +19,7 @@ export const Companies = () => {
     numberOfEmpoloyees?: number;
     place?: string;
   };
-  const handleClick = (params: any) => {
-    navigate("/company", { state: params });
-  };
+
   const [families, setFamilies] = useState<companyData[]>([]);
   useEffect(() => {
     const familiesCollectionRef = collection(db, "family");
