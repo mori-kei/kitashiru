@@ -10,7 +10,6 @@ import { PrivateRoute } from "./utils/PrivateRouter";
 import { Test } from "./pages/Test";
 import { Chart } from "./commponents/Chart";
 import { Header } from "./commponents/Header";
-
 import "./CSS/Chart.css";
 import "./CSS/reset.css";
 import { Home } from "./pages/Home";
@@ -41,16 +40,13 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             {/* <Route path="/company/:id" element={<Company />} /> */}
             <Route path="/companies" element={<Companies />}>
-            <Route index element={<CompanyIndex/>} />
-            <Route path=":companyId" element={<Company/>} />
+              <Route index element={<CompanyIndex />} />
+              <Route path=":companyId" element={<Company />} />
             </Route>
             <Route path="/posts" element={<Posts />}>
               <Route path=":postId" element={<Post />} />
             </Route>
-            {/* <Route path="/post" element={<Companies />} /> */}
-            {/* <Route path="/test" element={<Test/>} /> */}
-            {/* <Route path="/chart" element={<Chart/>} /> */}
-            {/* <Route path="/article" element={<Article />} /> */}
+            <Route path="/article" element={<Article />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>
