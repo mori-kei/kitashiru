@@ -1,18 +1,37 @@
 import React from "react";
 import { useAuth } from "../contexts/AuthContext";
 import styled from "@emotion/styled";
+const Outer = styled.div`
+  @media (min-width: 460px) {
+    width:85%;
+    max-width:1220px;
+    margin:0 auto;
+    .contents{
+      width:100%;
+      .content{
+        margin-top:30px;
+        .detail p{
+          display:inline;
+        }
+        .detail .left {
+          margin-right:30px;
+        }
+      }
+    }
+  }
+`;
 export const Article: React.FC = () => {
   return (
     <>
-      <div className="outer">
+      <Outer>
         <div className="contents">
           <div className="content">
             <div className="">
               <h1>リサイクルファクトリー株式会社</h1>
             </div>
-            <div className="">
-              <p>住所： 札幌市</p>
-              <p>業種：サービス・インフラ</p>
+            <div className="detail">
+              <p className="left">住所： 札幌市</p>
+              <p >業種：サービス・インフラ</p>
             </div>
           </div>
           <div className="content">
@@ -55,12 +74,13 @@ export const Article: React.FC = () => {
             </div>
             <div className="">
               <p>
-              持続可能な社会、循環型社会、地域コミュニティの創造に関心があり問題意識を持っている方、様々な会社を見て社会を広く知りたい方にとっては面白い会社です。 是非、一度会社見学にいらしてください。
+                持続可能な社会、循環型社会、地域コミュニティの創造に関心があり問題意識を持っている方、様々な会社を見て社会を広く知りたい方にとっては面白い会社です。
+                是非、一度会社見学にいらしてください。
               </p>
             </div>
           </div>
         </div>
-      </div>
+      </Outer>
     </>
   );
 };

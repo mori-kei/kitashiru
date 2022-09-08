@@ -3,10 +3,26 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase";
-// interface RouterParams {
-//   id: string;
-// }
-
+import styled from "@emotion/styled";
+const Outer = styled.div`
+  @media (min-width: 460px) {
+    width:85%;
+    max-width:1220px;
+    margin:0 auto;
+    .contents{
+      width:100%;
+      .content{
+        margin-top:30px;
+        .detail p{
+          display:inline;
+        }
+        .detail .left {
+          margin-right:30px;
+        }
+      }
+    }
+  }
+`;
 export const Company = () => {
   const [companyData, setCompanyData] = useState({});
   // const { companyId } = useParams<{ companyId: string }>();
@@ -22,9 +38,63 @@ export const Company = () => {
 
   return (
     <>
-      <p>カンパニーページだよー</p>
-      <p>{companyId}</p>
-      <p>{companyData.capital}</p>
+       <Outer>
+        <div className="contents">
+          <div className="content">
+            <div className="">
+              <h1>{companyData.companyName}</h1>
+            </div>
+            <div className="detail">
+              <p className="left">住所:{companyData.place}</p>
+              <p >業種：{companyData.industry}</p>
+            </div>
+          </div>
+          <div className="content">
+            <div className="">
+              <h1>事業内容</h1>
+            </div>
+            <div className="">
+              <p>
+                建築廃棄物や食品廃棄物などのリサイクル。リサイクル技術の研究開発。農業資材、土木資材、エネルギー資材の生産、販売。
+              </p>
+            </div>
+          </div>
+          <div className="content">
+            <div className="">
+              <h1>自社事業の魅力</h1>
+            </div>
+            <div className="">
+              <p>
+                {companyData.myContentCharm}
+              </p>
+            </div>
+          </div>
+          <div className="content">
+            <div className="circle">
+              <p>資本金</p>
+              <p>{companyData.capital}</p>
+            </div>
+            <div className="circle">
+              <p>売上</p>
+              <p>{companyData.earning}</p>
+            </div>
+            <div className="circle">
+              <p>従業員数</p>
+              <p>{companyData.numberOfEmployees}</p>
+            </div>
+          </div>
+          <div className="content">
+            <div className="">
+              <h1>メッセージ</h1>
+            </div>
+            <div className="">
+              <p>
+                {companyData.message}
+              </p>
+            </div>
+          </div>
+        </div>
+      </Outer>
     </>
   );
 };

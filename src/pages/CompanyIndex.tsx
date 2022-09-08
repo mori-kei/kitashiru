@@ -19,7 +19,11 @@ export const CompanyIndex = () => {
     numberOfEmpoloyees?: number;
     place?: string;
   };
+  const [selectedCulture,setSelectedCulture] = useState(1)
   const [families, setFamilies] = useState<companyData[]>([]);
+  const [innovations, setInnovations] = useState<companyData[]>([]);
+  const [market, setmarkets] = useState<companyData[]>([]);
+  const [officialss, setofficialss] = useState<companyData[]>([]);
   useEffect(() => {
     const familiesCollectionRef = collection(db, "family");
     getDocs(familiesCollectionRef).then((querySnapshot) => {

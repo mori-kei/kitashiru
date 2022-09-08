@@ -35,7 +35,7 @@ export const Header: React.FC = () => {
               ログアウト
             </Button>
           ) : (
-            <Button color="inherit">ログイン</Button>
+            <Button color="inherit" onClick={() => navigate("/signin")}>ログイン</Button>
           )}
         </Toolbar>
       </AppBar>
