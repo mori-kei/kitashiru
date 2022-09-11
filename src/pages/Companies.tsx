@@ -19,14 +19,7 @@ export const Companies = () => {
   };
 
   const [families, setFamilies] = useState<companyData[]>([]);
-  // useEffect(() => {
-  //   const familiesCollectionRef = collection(db, "family");
-  //   getDocs(familiesCollectionRef).then((querySnapshot) => {
-  //     setFamilies(
-  //       querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-  //     );
-  //   });
-  // }, []);
+
   return (
     <>
       <Outlet />

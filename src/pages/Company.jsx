@@ -32,6 +32,28 @@ export const Company = () => {
     getDoc(companyDocumentRef).then((documentSnapshot) => {
       if (documentSnapshot.exists()) {
         setCompanyData(documentSnapshot.data());
+      }else {
+        const companyDocumentRef = doc(db,"innovation",companyId);
+        getDoc(companyDocumentRef).then((documentSnapshot) => {
+          if(documentSnapshot.exists()){
+            setCompanyData(documentSnapshot.data())
+          }
+          else {
+            const companyDocumentRef = doc(db,"market",companyId);
+            getDoc(companyDocumentRef).then((documentSnapshot) => {
+              if(documentSnapshot.exists()){
+                setCompanyData(documentSnapshot.data())
+              }else {
+                const companyDocumentRef = doc(db,"officials",companyId);
+                getDoc(companyDocumentRef).then((documentSnapshot) => {
+                  if(documentSnapshot.exists()){
+                    setCompanyData(documentSnapshot.data())
+                  }
+                })
+              }
+            })
+          }
+        })
       }
     });
   }, []);
@@ -55,7 +77,7 @@ export const Company = () => {
             </div>
             <div className="">
               <p>
-                建築廃棄物や食品廃棄物などのリサイクル。リサイクル技術の研究開発。農業資材、土木資材、エネルギー資材の生産、販売。
+              {companyData.contentDetail}
               </p>
             </div>
           </div>
