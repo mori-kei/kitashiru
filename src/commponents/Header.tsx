@@ -22,12 +22,12 @@ export const Header: React.FC = () => {
   const { currentUser } = useAuth();
   return (
     <Box sx={{ flexGrow: 2 }}>
-      <AppBar position="static">
+      <AppBar position="static" style={{ backgroundColor: "#D3DEF1" }}>
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             きたしる
           </Typography>
-          <Button onClick={() => navigate("/")} color="inherit">
+          <Button onClick={() => navigate("/companies")} color="inherit">
             企業を見る
           </Button>
           {currentUser ? (
@@ -35,7 +35,9 @@ export const Header: React.FC = () => {
               ログアウト
             </Button>
           ) : (
-            <Button color="inherit" onClick={() => navigate("/signin")}>ログイン</Button>
+            <Button color="inherit" onClick={() => navigate("/signin")}>
+              ログイン
+            </Button>
           )}
         </Toolbar>
       </AppBar>

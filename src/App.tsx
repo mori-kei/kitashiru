@@ -1,22 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { db } from "./firebase";
-import { collection, getDocs } from "firebase/firestore";
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { SignIn } from "./pages/SignIn";
 import { SignUp } from "./pages/SignUp";
-import { Article } from "./pages/Article";
 import { AuthProvider } from "./contexts/AuthContext";
 import { PrivateRoute } from "./utils/PrivateRouter";
 import { Test } from "./pages/Test";
-import { Chart } from "./commponents/Chart";
 import { Header } from "./commponents/Header";
 import "./CSS/Chart.css";
 import "./CSS/reset.css";
 import { Home } from "./pages/Home";
 import { Company } from "./pages/Company";
 import { Companies } from "./pages/Companies";
-import Posts from "./pages/Posts";
-import Post from "./pages/post";
+
 import { CompanyIndex } from "./pages/CompanyIndex";
 function App() {
   // const [posts, setPosts] = useState([]);
@@ -43,10 +38,6 @@ function App() {
               <Route index element={<CompanyIndex />} />
               <Route path=":companyId" element={<Company />} />
             </Route>
-            <Route path="/posts" element={<Posts />}>
-              <Route path=":postId" element={<Post />} />
-            </Route>
-            <Route path="/article" element={<Article />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>

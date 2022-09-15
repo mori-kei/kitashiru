@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
+import styled from "@emotion/styled";
 import {
   Link,
   Outlet,
@@ -33,6 +34,34 @@ export const CompanyIndex = () => {
     numberOfEmpoloyees?: number;
     place?: string;
   };
+  const Buttons = styled.div`
+    @media (min-width: 460px) {
+      width: 80%;
+      margin: 0 auto;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      & button {
+        color: #fff;
+      }
+    }
+    @media (max-width: 460px) {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      width: 85%;
+      margin: 0 auto;
+      margin-top: 20px;
+      & button {
+        width: 45%;
+        color: #fff;
+        font-size: 10px;
+        margin-top: 5px;
+      }
+    }
+  `;
   const [selectedCulture, setSelectedCulture] = useState(0);
   const [families, setFamilies] = useState<companyData[]>([]);
   const [innovations, setInnovations] = useState<companyData[]>([]);
@@ -76,14 +105,36 @@ export const CompanyIndex = () => {
   }, []);
   return (
     <>
-      <Button onClick={() => setSelectedCulture(0)}>家族文化を見る</Button>
-      <Button onClick={() => setSelectedCulture(1)}>
-        イノベーション文化を見る
-      </Button>
-      <Button onClick={() => setSelectedCulture(2)}>
-        マーケット文化を見る
-      </Button>
-      <Button onClick={() => setSelectedCulture(3)}>官僚文化を見る</Button>
+      <Buttons>
+        <Button
+          style={{ backgroundColor: "#34c759" }}
+          className="family"
+          onClick={() => setSelectedCulture(0)}
+        >
+          家族文化
+        </Button>
+        <Button
+          style={{ backgroundColor: "#ff9500" }}
+          className="innovation"
+          onClick={() => setSelectedCulture(1)}
+        >
+          イノベーション文化
+        </Button>
+        <Button
+          style={{ backgroundColor: "#ff2d55" }}
+          className="market"
+          onClick={() => setSelectedCulture(2)}
+        >
+          マーケット文化
+        </Button>
+        <Button
+          style={{ backgroundColor: "#00c7be" }}
+          className="official"
+          onClick={() => setSelectedCulture(3)}
+        >
+          官僚文化
+        </Button>
+      </Buttons>
       {selectedCulture === 0 ? <FamilyData families={families} /> : null}
       {selectedCulture === 1 ? (
         <InnovationData innovations={innovations} />
