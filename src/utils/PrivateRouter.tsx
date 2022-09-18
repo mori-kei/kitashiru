@@ -12,9 +12,6 @@ export const PrivateRoute: React.FC<Props> = ({ children }) => {
   return currentUser ? (
     <>
       {children}
-      <div className="notice">
-        <i>you are in a private route.</i>
-      </div>
     </>
   ) : (
     <SignIn />

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  signInWithEmailAndPassword
-} from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import {
@@ -17,7 +15,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-
+import styled from "@emotion/styled";
 // const auth = getAuth()
 // const signInAction = (auth,email,password) => {
 //   createUserWithEmailAndPassword(auth,email,password)
@@ -25,12 +23,19 @@ import {
 //     const user
 //   })
 // }
-
+const SignInComponent = styled.div`
+  @media (max-width: 460px) {
+    padding-top: 80px;
+  }
+  @media (min-width: 460px) {
+    padding-top: 80px;
+  }
+`;
 export const SignIn: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
   };
@@ -42,16 +47,17 @@ export const SignIn: React.FC = () => {
   };
   const handleSubmit = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth,email,password).then((user) => {
-      console.log('ログイン成功=',user.user.uid)
-      navigate("/secret")
-    })
-    .catch((error) => {
-      console.error(error)
-    })   
+    signInWithEmailAndPassword(auth, email, password)
+      .then((user) => {
+        console.log("ログイン成功=", user.user.uid);
+        navigate("/companies");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
   return (
-    <>
+    <SignInComponent>
       <Grid>
         <Paper
           elevation={3}
@@ -69,7 +75,7 @@ export const SignIn: React.FC = () => {
             alignItems="center"
           >
             <Typography variant={"h5"} sx={{ m: "30px" }}>
-              サインイン
+              ログイン
             </Typography>
           </Grid>
           {/* <TextField
@@ -100,17 +106,23 @@ export const SignIn: React.FC = () => {
           />
           {/* ラベルとチェックボックス */}
           <Box mt={3}>
-            <Button type="submit" color="primary" variant="contained" fullWidth onClick={handleSubmit}>
-              サインイン
+            <Button
+              type="submit"
+              color="primary"
+              variant="contained"
+              fullWidth
+              onClick={handleSubmit}
+            >
+              ログイン
             </Button>
 
             <Typography variant="caption" display="block" mt={6}>
-              アカウントを持っていますか？
-              <Link href="/signup">アカウントを作成</Link>
+              アカウントを持っていませんか？
             </Typography>
+            <Link href="/signup">アカウントを作成</Link>
           </Box>
         </Paper>
       </Grid>
-    </>
+    </SignInComponent>
   );
 };

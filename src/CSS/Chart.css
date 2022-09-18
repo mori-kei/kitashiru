@@ -30,6 +30,10 @@
   width:85%;
   padding: 1em;
   background:#fff;
+  margin: 0 auto;
+}
+.recharts-wrapper{
+  position: static !important;
   
 }
 .flex-parent{

@@ -31,14 +31,19 @@ const CardItem = styled.div`
     }
     & h3 {
       font-size: 24px;
+      font-weight:600;
       margin-bottom: 5px;
+    }
+    & p {
+      text-indent: -40px;
+      padding-left: 40px;
     }
   }
   @media (max-width: 460px) {
     width: 75%;
     text-decoration: none !important;
     color: #333;
-    margin:0 auto;
+    margin: 0 auto;
     margin-top: 20px;
 
     //カードのcss
@@ -53,7 +58,12 @@ const CardItem = styled.div`
     }
     & h3 {
       font-size: 24px;
+      font-weight:600;
       margin-bottom: 5px;
+    }
+    & p {
+      text-indent: -40px;
+      padding-left: 40px;
     }
   }
 `;
@@ -68,8 +78,8 @@ export const FamilyData = ({ families }) => {
           >
             <div>
               <h3 style={{ color: "#34c759" }}>{family.companyName}</h3>
-              <p className="industry">{family.industry}</p>
-              <p>{family.place}</p>
+              <p className="industry">業種:{family.industry}</p>
+              <p>住所:{family.place}</p>
             </div>
           </Link>
         </CardItem>
@@ -89,8 +99,8 @@ export const InnovationData = ({ innovations }) => {
           >
             <div>
               <h3 style={{ color: "#ff9500" }}>{innovation.companyName}</h3>
-              <p className="industry">{innovation.industry}</p>
-              <p>{innovation.place}</p>
+              <p className="industry">業種:{innovation.industry}</p>
+              <p>住所:{innovation.place}</p>
             </div>
           </Link>
         </CardItem>
@@ -110,8 +120,8 @@ export const MarketsData = ({ markets }) => {
           >
             <div>
               <h3 style={{ color: "#ff2d55" }}>{market.companyName}</h3>
-              <p className="industry">{market.industry}</p>
-              <p>{market.place}</p>
+              <p className="industry">業種:{market.industry}</p>
+              <p>住所:{market.place}</p>
             </div>
           </Link>
         </CardItem>
@@ -131,8 +141,8 @@ export const OfficialssData = ({ officials }) => {
           >
             <div>
               <h3 style={{ color: "#00c7be" }}>{officials.companyName}</h3>
-              <p className="industry">{officials.industry}</p>
-              <p>{officials.place}</p>
+              <p className="industry">業種:{officials.industry}</p>
+              <p>住所:{officials.place}</p>
             </div>
           </Link>
         </CardItem>

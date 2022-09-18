@@ -1,14 +1,14 @@
 import { Button } from "@mui/material";
-import { collection, getDocs } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  DocumentSnapshot,
+  getDoc,
+  getDocs,
+} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import {
-  Link,
-  Outlet,
-  useLocation,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import {
   FamilyData,
   InnovationData,
@@ -16,11 +16,26 @@ import {
   OfficialssData,
 } from "../commponents/CompanyData";
 import { db } from "../firebase";
-
+import { useAuth } from "../contexts/AuthContext";
+import { getAuth } from "firebase/auth";
+import { RecomendTest } from "../commponents/RecomendTest";
+import { ShowCulture } from "../commponents/ShowCulture";
+const CompanyIndexComponent = styled.div`
+  @media (min-width: 460px) {
+    padding-top: 80px;
+    padding-bottom: 30px;
+    min-height: 100vh;
+  }
+  @media (max-width: 460px) {
+    padding-top: 80px;
+    padding-bottom: 30px;
+    min-height: 100vh;
+  }
+`;
 export const CompanyIndex = () => {
+  const [userCulture, setUserCulture] = useState();
   const navigate = useNavigate();
-  const { companyId } = useParams();
-  console.log(companyId);
+
   type companyData = {
     id?: string;
     capital?: string;
@@ -36,8 +51,8 @@ export const CompanyIndex = () => {
   };
   const Buttons = styled.div`
     @media (min-width: 460px) {
-      width: 80%;
-      margin: 0 auto;
+      width: 500px;
+      margin-left: 10%;
       margin-top: 20px;
       margin-bottom: 20px;
       display: flex;
@@ -103,8 +118,45 @@ export const CompanyIndex = () => {
       );
     });
   }, []);
+
+  useEffect(() => {
+    const user = getAuth().currentUser;
+
+    if (user) {
+      console.log(user.uid);
+      const userDocumentRef = doc(db, "users", user.uid);
+      getDoc(userDocumentRef).then((documentSnapshot) => {
+        const userCultureData = documentSnapshot.get("culture");
+        console.log(documentSnapshot.get("culture"));
+        setUserCulture(userCultureData);
+      });
+    }
+  }, []);
+  useEffect(() => {
+    if (userCulture == 1) {
+      setSelectedCulture(0);
+    } else if (userCulture == 2) {
+      setSelectedCulture(1);
+    } else if (userCulture == 3) {
+      setSelectedCulture(2);
+    } else if (userCulture == 4) {
+      setSelectedCulture(3);
+    }
+  }, [userCulture]);
+
+  const onClickNavigateTest = () => {
+    navigate("/test");
+  };
+  //   useEffect(() => {
+  //     console.log(userCulture);
+  // }, [userCulture]);
   return (
-    <>
+    <CompanyIndexComponent>
+      {userCulture == undefined ? (
+        <RecomendTest onClickNavigateTest={onClickNavigateTest} />
+      ) : (
+        <ShowCulture culture={userCulture} />
+      )}
       <Buttons>
         <Button
           style={{ backgroundColor: "#34c759" }}
@@ -142,7 +194,7 @@ export const CompanyIndex = () => {
       {selectedCulture === 2 ? <MarketsData markets={markets} /> : null}
       {selectedCulture === 3 ? <OfficialssData officials={officialss} /> : null}
       <Outlet />
-    </>
+    </CompanyIndexComponent>
   );
 };
 

@@ -18,6 +18,17 @@ import { getAuth } from "firebase/auth";
 import { Send } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { TestRule } from "./TestRule";
+const Questions = styled.div`
+  @media (min-width: 460px) {
+    padding-top:80px;
+    padding-bottom:40px;
+  }
+  @media (max-width: 460px) {
+    padding-top:80px;
+    padding-bottom:40px;
+  }
+`;
+
 const Question = styled.div`
   color: "#333";
   margin: 0 auto;
@@ -47,18 +58,20 @@ const Question = styled.div`
   }
 `;
 const ButtonBox = styled.div`
-   @media (min-width: 460px) {
+  @media (min-width: 460px) {
     & button {
-      width:100%;
+      width: 100%;
+      margin-top: 10px;
     }
-   }
-   @media (max-width: 460px) {
+  }
+  @media (max-width: 460px) {
     & button {
-      width:100%;
-      margin:0 auto;
+      width: 100% !important;
+      margin: 0 auto;
+      margin-top: 10px;
     }
-   }
-`
+  }
+`;
 const ModalInner = styled.div`
   @media (min-width: 460px) {
     max-width: 1280px;
@@ -71,14 +84,13 @@ const ModalInner = styled.div`
     transform: "translate(-50%, -50%)";
     border-radius: 20px;
     & div {
-      
       & .button-box {
-        width:100%;
-        margin:0 auto;
-        margin-top:10px;
+        width: 100%;
+        margin: 0 auto;
+        margin-top: 10px;
         & button {
-          margin:0 auto;
-          width:100%;
+          margin: 0 auto;
+          width: 100%;
         }
       }
     }
@@ -95,18 +107,17 @@ const ModalInner = styled.div`
   }
 `;
 
-
 export const Test = () => {
   const { currentUser } = useAuth();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   //回答結果のモーダルのstateと関数
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   //ルール説明のモーダルのstateと関数
-  const [ruleOpen,setRuleOpen] = useState(true);
+  const [ruleOpen, setRuleOpen] = useState(true);
   const hadleRuleOpen = () => setRuleOpen(true);
-  const handleRuleClose = () => setRuleOpen(false)
+  const handleRuleClose = () => setRuleOpen(false);
   //回答結果state
   // Q1
   const [q01Fam, setQ01Fam] = useState<string>("0");
@@ -289,28 +300,33 @@ export const Test = () => {
     setCulture(Number(e.target.value));
   };
   const user = getAuth().currentUser;
-  console.log(user);
+  useEffect(() => {
+   
+    console.log(user);
+    
+  }, [user])
+  
+ 
   const handleSubmit = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     if (user) {
       const docUid = user.uid;
-      console.log(docUid)
+      console.log(docUid);
       const userDocumentRef = doc(db, "users", user.uid);
       await setDoc(userDocumentRef, {
         uid: user.uid,
-        culture:culture,
-        resultFam:resultFam,
-        resultInno:resultInno,
-        resultMar:resultMar,
-        resultBure:resultBure,
+        culture: culture,
+        resultFam: resultFam,
+        resultInno: resultInno,
+        resultMar: resultMar,
+        resultBure: resultBure,
       });
-      navigate('/')
+      navigate("/companies");
     }
-   
   };
 
   return (
-    <div className="">
+    <Questions>
       <Question>
         <div>
           <h1>1.顕著にみられる特徴</h1>
@@ -641,28 +657,32 @@ export const Test = () => {
         falseText="合計値が100になっていない質問があります"
       /> */}
       <ButtonBox>
-      {firstQues === 100 &&
-      secondQues === 100 &&
-      thirdQues === 100 &&
-      fourthQues === 100 &&
-      fifthQues === 100 &&
-      sixthQues === 100 ? (
-        <Button variant="contained" onClick={handleOpen}>結果を見る</Button>
-      ) : <Button variant="outlined" color="error">合計値が100になっていない質問があります</Button>}
+        {firstQues === 100 &&
+        secondQues === 100 &&
+        thirdQues === 100 &&
+        fourthQues === 100 &&
+        fifthQues === 100 &&
+        sixthQues === 100 ? (
+          <Button variant="contained" onClick={handleOpen}>
+            結果を見る
+          </Button>
+        ) : (
+          <Button variant="outlined" color="error">
+            合計値が100になっていない質問があります
+          </Button>
+        )}
       </ButtonBox>
-      
+
       <Modal
         open={ruleOpen}
         onClose={handleRuleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-      <TestRule
-        setRuleOpen={setRuleOpen}
-      />
-
+        <TestRule setRuleOpen={setRuleOpen} />
       </Modal>
       <Modal
+        
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
@@ -694,13 +714,37 @@ export const Test = () => {
                 ))}
               </Select>
             </FormControl>
-            <div className="button-box">
-            <Button variant="contained" onClick={handleSubmit} endIcon={<Send />}>診断結果を保存</Button>
-            </div>
-            
+            <ButtonBox>
+              {/* {firstQues === 100 &&
+      secondQues === 100 &&
+      thirdQues === 100 &&
+      fourthQues === 100 &&
+      fifthQues === 100 &&
+      sixthQues === 100 ? (
+        <Button variant="contained" onClick={handleOpen}>結果を見る</Button>
+      ) : <Button variant="outlined" color="error">合計値が100になっていない質問があります</Button>} */}
+              {culture == 1 || culture == 2 || culture == 3 || culture == 4 ? (
+                <Button
+                  variant="contained"
+                  onClick={handleSubmit}
+                  endIcon={<Send />}
+                >
+                  診断結果を保存
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  onClick={handleSubmit}
+                  endIcon={<Send />}
+                  disabled={true}
+                >
+                  診断結果を保存
+                </Button>
+              )}
+            </ButtonBox>
           </Box>
         </ModalInner>
       </Modal>
-    </div>
+    </Questions>
   );
 };

@@ -19,7 +19,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-
+import styled from "@emotion/styled";
 // const auth = getAuth()
 // const signInAction = (auth,email,password) => {
 //   createUserWithEmailAndPassword(auth,email,password)
@@ -27,7 +27,14 @@ import {
 //     const user
 //   })
 // }
-
+const SignUpComponent = styled.div`
+  @media (max-width: 460px) {
+    padding-top:80px;
+  }
+  @media (min-width: 460px) {
+    padding-top:80px;
+  }
+`
 export const SignUp: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -48,7 +55,7 @@ export const SignUp: React.FC = () => {
     .then((userCredential) => {
       console.log("user created");
       console.log(userCredential)
-      navigate('/')
+      navigate('/companies')
     })
     .catch((error) => {
       alert(error.message)
@@ -57,7 +64,7 @@ export const SignUp: React.FC = () => {
 
   };
   return (
-    <>
+    <SignUpComponent>
       <Grid>
         <Paper
           elevation={3}
@@ -75,7 +82,7 @@ export const SignUp: React.FC = () => {
             alignItems="center"
           >
             <Typography variant={"h5"} sx={{ m: "30px" }}>
-              アカウント登録
+              アカウント作成
             </Typography>
           </Grid>
           {/* <TextField
@@ -107,16 +114,16 @@ export const SignUp: React.FC = () => {
           {/* ラベルとチェックボックス */}
           <Box mt={3}>
             <Button type="submit" color="primary" variant="contained" fullWidth onClick={handleSubmit}>
-              サインアップ
+              アカウント作成
             </Button>
 
             <Typography variant="caption" display="block" mt={6}>
               アカウントをお持ちの方はこちら
-              <Link href="signin">サインイン</Link>
+              <Link href="signin">ログイン</Link>
             </Typography>
           </Box>
         </Paper>
       </Grid>
-    </>
+    </SignUpComponent>
   );
 };

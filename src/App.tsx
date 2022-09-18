@@ -13,32 +13,29 @@ import { Company } from "./pages/Company";
 import { Companies } from "./pages/Companies";
 
 import { CompanyIndex } from "./pages/CompanyIndex";
+import { NoMatch } from "./pages/NoMatch";
+import { Footer } from "./commponents/Footer";
 function App() {
-  // const [posts, setPosts] = useState([]);
-  // useEffect(() => {
-  //   const postData = collection(db, "family");
-  //   console.log(postData)
-  //   getDocs(postData).then((snapshot) => {
-  //     console.log(snapshot.docs.map((doc) => doc.data()))
-  //   })
-  // }, []);
-
   return (
     <>
       <BrowserRouter>
         <AuthProvider>
           <Header />
           <Routes>
-            <Route path="test" element={<PrivateRoute children={<Test />} />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<SignUp />} />
-            {/* <Route path="/company/:id" element={<Company />} /> */}
-            <Route path="/companies" element={<Companies />}>
+            <Route path="test" element={<PrivateRoute children={<Test />} />} />
+            <Route path="*" element={<PrivateRoute children={<NoMatch />} />} />
+            <Route
+              path="/companies"
+              element={<PrivateRoute children={<Companies />} />}
+            >
               <Route index element={<CompanyIndex />} />
               <Route path=":companyId" element={<Company />} />
             </Route>
           </Routes>
+          <Footer />
         </AuthProvider>
       </BrowserRouter>
     </>
