@@ -5,7 +5,7 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import {
   Avatar,
   Box,
@@ -20,6 +20,7 @@ import {
   Typography,
 } from "@mui/material";
 import styled from "@emotion/styled";
+import { doc, setDoc } from "firebase/firestore";
 // const auth = getAuth()
 // const signInAction = (auth,email,password) => {
 //   createUserWithEmailAndPassword(auth,email,password)
@@ -29,17 +30,17 @@ import styled from "@emotion/styled";
 // }
 const SignUpComponent = styled.div`
   @media (max-width: 460px) {
-    padding-top:80px;
+    padding-top: 80px;
   }
   @media (min-width: 460px) {
-    padding-top:80px;
+    padding-top: 80px;
   }
-`
+`;
 export const SignUp: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
   };
@@ -49,19 +50,48 @@ export const SignUp: React.FC = () => {
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
-  const handleSubmit = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      console.log("user created");
-      console.log(userCredential)
-      navigate('/companies')
-    })
-    .catch((error) => {
-      alert(error.message)
-      console.error(error)
-    }); 
+ 
+  const signUpAction = (username: string, email: string, password: string) => {
+    return createUserWithEmailAndPassword(auth, email, password).then(
+      (result) => {
+        const user = result.user;
+        if (user) {
+          const uid = user.uid;
 
+          const userInitialData = {
+            email: email,
+            uid: uid,
+            name: username,
+            password:password
+          };
+          const userDocumentRef = doc(db, "users", uid);
+          setDoc(userDocumentRef, userInitialData);
+        }
+      }
+    );
+  };
+  // const handleSubmit = (e: React.MouseEvent<HTMLElement>) => {
+  //   e.preventDefault();
+  //   createUserWithEmailAndPassword(auth, email, password)
+  //   .then((userCredential) => {
+  //     console.log("user created");
+  //     console.log(userCredential)
+  //     navigate('/companies')
+  //   })
+  //   .catch((error) => {
+  //     alert(error.message)
+  //     console.error(error)
+  //   });
+
+  // };
+  const handleSubmit = async (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    try {
+      await signUpAction(username, email, password);
+      navigate("/companies");
+    } catch {
+      console.log("error");
+    }
   };
   return (
     <SignUpComponent>
@@ -94,6 +124,15 @@ export const SignUp: React.FC = () => {
             onChange={handleUsernameChange}
           /> */}
           <TextField
+            type="text"
+            label="Username"
+            variant="standard"
+            fullWidth
+            required
+            value={username}
+            onChange={handleUsernameChange}
+          />
+          <TextField
             type="email"
             label="e-mail"
             variant="standard"
@@ -113,7 +152,13 @@ export const SignUp: React.FC = () => {
           />
           {/* ラベルとチェックボックス */}
           <Box mt={3}>
-            <Button type="submit" color="primary" variant="contained" fullWidth onClick={handleSubmit}>
+            <Button
+              type="submit"
+              color="primary"
+              variant="contained"
+              fullWidth
+              onClick={handleSubmit}
+            >
               アカウント作成
             </Button>
 

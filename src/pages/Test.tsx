@@ -20,12 +20,12 @@ import { useNavigate } from "react-router-dom";
 import { TestRule } from "./TestRule";
 const Questions = styled.div`
   @media (min-width: 460px) {
-    padding-top:80px;
-    padding-bottom:40px;
+    padding-top: 80px;
+    padding-bottom: 40px;
   }
   @media (max-width: 460px) {
-    padding-top:80px;
-    padding-bottom:40px;
+    padding-top: 80px;
+    padding-bottom: 40px;
   }
 `;
 
@@ -301,26 +301,27 @@ export const Test = () => {
   };
   const user = getAuth().currentUser;
   useEffect(() => {
-   
     console.log(user);
-    
-  }, [user])
-  
- 
+  }, [user]);
+
   const handleSubmit = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     if (user) {
       const docUid = user.uid;
       console.log(docUid);
       const userDocumentRef = doc(db, "users", user.uid);
-      await setDoc(userDocumentRef, {
-        uid: user.uid,
-        culture: culture,
-        resultFam: resultFam,
-        resultInno: resultInno,
-        resultMar: resultMar,
-        resultBure: resultBure,
-      });
+      await setDoc(
+        userDocumentRef,
+        {
+          uid: user.uid,
+          culture: culture,
+          resultFam: resultFam,
+          resultInno: resultInno,
+          resultMar: resultMar,
+          resultBure: resultBure,
+        },
+        { merge: true }
+      );
       navigate("/companies");
     }
   };
@@ -682,7 +683,6 @@ export const Test = () => {
         <TestRule setRuleOpen={setRuleOpen} />
       </Modal>
       <Modal
-        
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"

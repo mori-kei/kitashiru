@@ -9,23 +9,23 @@ const Outer = styled.div`
     width: 85%;
     max-width: 1220px;
     margin: 0 auto;
-    padding-top:80px;
-    min-height:100vh;
-    padding-bottom:30px;
+    padding-top: 80px;
+    min-height: 100vh;
+    padding-bottom: 30px;
     .contents {
       width: 100%;
       .content {
-        padding-bottom:15px;
-        border-bottom:1px solid #E3E4E5;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #e3e4e5;
         h1 {
-          margin-bottom:5px;
+          margin-bottom: 5px;
         }
-         .company-name {
-          text-align:center;
-          font-weight:600 !important;
+        .company-name {
+          text-align: center;
+          font-weight: 600 !important;
         }
         .detail {
-          text-align:center;
+          text-align: center;
         }
         & .circle {
           position: relative;
@@ -33,9 +33,10 @@ const Outer = styled.div`
           width: 150px;
           height: 150px;
           border-radius: 50%;
-          background: skyblue;
+          border: 1px solid #e3e4e5;
+          box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
           line-height: 150px;
-          margin-right:20px;
+          margin-right: 20px;
           & p {
             position: absolute;
             display: inline-block;
@@ -66,30 +67,36 @@ const Outer = styled.div`
       width: 100%;
     }
     & .content {
-      margin-top: 10px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #e3e4e5;
+      padding-top:20px;
+      & h1 {
+        margin-bottom: 5px;
+      }
       & .circle {
-          position: relative;
-          display: block;
+        position: relative;
+        display: block;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+
+        line-height: 150px;
+        margin: 0 auto;
+        margin-top: 20px;
+        border: 1px solid #e3e4e5;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+
+        & p {
+          position: absolute;
+          display: inline-block;
+          left: 0;
+          top: 50%;
+          -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
           width: 150px;
-          height: 150px;
-          border-radius: 50%;
-          background: skyblue;
-          line-height: 150px;
-          margin:0 auto;
-        margin-top:20px;
-      
-        
-          & p {
-            position: absolute;
-            display: inline-block;
-            left: 0;
-            top: 50%;
-            -webkit-transform: translateY(-50%);
-            transform: translateY(-50%);
-            width: 150px;
-            text-align: center;
-          }
+          text-align: center;
         }
+      }
     }
   }
 `;
