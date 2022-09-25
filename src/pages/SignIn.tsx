@@ -53,7 +53,7 @@ export const SignIn: React.FC = () => {
         navigate("/companies");
       })
       .catch((error) => {
-        console.error(error);
+          alert("ログインに失敗しました")
       });
   };
   return (
