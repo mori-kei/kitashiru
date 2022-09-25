@@ -55,6 +55,12 @@ const Question = styled.div`
     width: 80%;
     margin-bottom: 20px;
     padding: 20px 30px;
+    p {
+      margin-top: 20px;
+    }
+    .show-value {
+      margin-top: 20px;
+    }
   }
 `;
 const ButtonBox = styled.div`
@@ -380,6 +386,9 @@ export const Test = () => {
             size="small"
           />
         </div>
+        <p className="show-value">
+          あなたが入力したこの質問の合計値:{firstQues}
+        </p>
       </Question>
       <Question>
         <h1>2.リーダーシップスタイル</h1>
@@ -433,6 +442,9 @@ export const Test = () => {
             size="small"
           />
         </div>
+        <p className="show-value">
+          あなたが入力したこの質問の合計値:{secondQues}
+        </p>
       </Question>
       <Question>
         <h1>3.従業員管理</h1>
@@ -486,6 +498,9 @@ export const Test = () => {
             size="small"
           />
         </div>
+        <p className="show-value">
+          あなたが入力したこの質問の合計値:{thirdQues}
+        </p>
       </Question>
       <Question>
         <h1>4.組織を団結させるもの</h1>
@@ -539,6 +554,9 @@ export const Test = () => {
             size="small"
           />
         </div>
+        <p className="show-value">
+          あなたが入力したこの質問の合計値:{fourthQues}
+        </p>
       </Question>
       <Question>
         <h1>5.戦略的に重視するもの</h1>
@@ -592,6 +610,9 @@ export const Test = () => {
             size="small"
           />
         </div>
+        <p className="show-value">
+          あなたが入力したこの質問の合計値:{fifthQues}
+        </p>
       </Question>
       <Question>
         <h1>6.成功の基準</h1>
@@ -645,18 +666,10 @@ export const Test = () => {
             size="small"
           />
         </div>
+        <p className="show-value">
+          あなたが入力したこの質問の合計値:{sixthQues}
+        </p>
       </Question>
-      {/* <ResultButton
-        firstQues={firstQues}
-        secondQues={secondQues}
-        thirdQues={thirdQues}
-        fourthQues={fourthQues}
-        fifthQues={fifthQues}
-        sixthQues={sixthQues}
-        openModal={openModal}
-        trueText="結果を確認する"
-        falseText="合計値が100になっていない質問があります"
-      /> */}
       <ButtonBox>
         {firstQues === 100 &&
         secondQues === 100 &&
@@ -715,14 +728,6 @@ export const Test = () => {
               </Select>
             </FormControl>
             <ButtonBox>
-              {/* {firstQues === 100 &&
-      secondQues === 100 &&
-      thirdQues === 100 &&
-      fourthQues === 100 &&
-      fifthQues === 100 &&
-      sixthQues === 100 ? (
-        <Button variant="contained" onClick={handleOpen}>結果を見る</Button>
-      ) : <Button variant="outlined" color="error">合計値が100になっていない質問があります</Button>} */}
               {culture == 1 || culture == 2 || culture == 3 || culture == 4 ? (
                 <Button
                   variant="contained"
