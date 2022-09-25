@@ -50,7 +50,7 @@ export const SignUp: React.FC = () => {
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
- 
+
   const signUpAction = (username: string, email: string, password: string) => {
     return createUserWithEmailAndPassword(auth, email, password).then(
       (result) => {
@@ -62,7 +62,7 @@ export const SignUp: React.FC = () => {
             email: email,
             uid: uid,
             name: username,
-            password:password
+            password: password,
           };
           const userDocumentRef = doc(db, "users", uid);
           setDoc(userDocumentRef, userInitialData);
@@ -90,7 +90,7 @@ export const SignUp: React.FC = () => {
       await signUpAction(username, email, password);
       navigate("/companies");
     } catch {
-      console.log("error");
+      alert("アカウント作成に失敗しました");
     }
   };
   return (
