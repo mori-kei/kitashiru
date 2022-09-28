@@ -1,46 +1,31 @@
-# Getting Started with Create React App
+# BodyMakeApp  
+  
+## 作成目的・背景
+「北海道の中小企業の魅力を学生に伝えたい」「就職活動を始めたがどの様な企業が自分に合っているかわからない」
+という中小企業と就職活動中の学生の課題を解決するサービスです。
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 特徴
+学生が企業を選ぶ際に企業の風土や雰囲気を大切にしているということが調査によって分かったため、
+企業の雰囲気を学術的な指標によって「家族文化」・「イノベーション文化」・「マーケット文化」・「官僚文化」の
+4つに分類し、メインユーザーである学生にも組織文化診断をしてもらうことで、求める雰囲気によって企業がおすすめされるようにしました。
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 使用している技術スタック  
+- node v16.16.0
+- react 18.2.0
+- typescript 4.8.2
+- firebase 9.9.3
+    
+## 機能概要
+- サインイン/サインアップ機能
+- 学生の志向組織文化診断機能
+- 企業情報の一覧表示機能
+- 企業情報の詳細ページ表示機能
+- ユーザーの組織文化診断結果による企業情報の検索機能
+  
+## こだわりポイント
+- ユーザーが就職活動を始めたての学生であるため、楽しい印象を与えられるようにデザインしました。
+- 組織文化診断のやり方が複雑なので、説明文を追加したり、例を追加することで、始めてでも分かりやすく行えるようにしました。
+- TypeScriptを使用し型定義をすることでサービスの規模が拡大してもバグやエラーが発生しにくいようにしました。
+## ホスト先URL 
+こちらよりご覧ください
+[きたしる]: https://kitashiru-177d8.web.app/
