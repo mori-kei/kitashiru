@@ -345,7 +345,6 @@ export const Test = () => {
             variant="outlined"
             disabled
             type="number"
-           
             value={30}
             size="small"
           />
@@ -358,7 +357,6 @@ export const Test = () => {
             variant="outlined"
             disabled
             type="number"
-           
             value={20}
             size="small"
           />
@@ -387,9 +385,7 @@ export const Test = () => {
             size="small"
           />
         </div>
-        <p className="show-value">
-          あなたが入力したこの質問の合計値:100
-        </p>
+        <p className="show-value">あなたが入力したこの質問の合計値:100</p>
       </Question>
       <Question>
         <div>

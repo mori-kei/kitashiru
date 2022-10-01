@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase";
 import styled from "@emotion/styled";
+import { Button } from "@mui/material";
 const Outer = styled.div`
   @media (min-width: 460px) {
     width: 85%;
@@ -57,6 +58,15 @@ const Outer = styled.div`
         }
       }
     }
+    .button-outer {
+      width: 85%;
+      margin: 0 auto;
+      text-align: center;
+      margin-top: 30px;
+      button {
+        width: 800px;
+      }
+    }
   }
   @media (max-width: 460px) {
     width: 85%;
@@ -69,7 +79,7 @@ const Outer = styled.div`
     & .content {
       padding-bottom: 15px;
       border-bottom: 1px solid #e3e4e5;
-      padding-top:20px;
+      padding-top: 20px;
       & h1 {
         margin-bottom: 5px;
       }
@@ -96,6 +106,15 @@ const Outer = styled.div`
           width: 150px;
           text-align: center;
         }
+      }
+    }
+    .button-outer {
+      width: 85%;
+      margin: 0 auto;
+      text-align: center;
+      margin-top: 30px;
+      button {
+        width: 100%;
       }
     }
   }
@@ -189,9 +208,25 @@ export const Company = () => {
               <h1>メッセージ</h1>
             </div>
             <div className="">
-              <p>{companyData.message}</p>
+             {companyData.message}
             </div>
           </div>
+          {companyData == null ? null : (
+            <div className="button-outer">
+              <Button
+                style={{
+                  color: "#fff",
+                  fontWeight: "600",
+                  backgroundColor: "#00c7be",
+                }}
+                variant="contained"
+                target="_blank"
+                href={companyData.HP}
+              >
+                企業のホームページを見る
+              </Button>
+            </div>
+          )}
         </div>
       </Outer>
     </>

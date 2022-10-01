@@ -73,6 +73,15 @@ export const Header: React.FC = () => {
                 企業を見る
               </Button>
             ) : null}
+              {currentUser ? (
+              <Button
+                onClick={() => navigate("/culture")}
+                style={{ color: "#6B6668", fontWeight: "600" }}
+                className="pc"
+              >
+                組織文化について
+              </Button>
+            ) : null}
 
             {currentUser ? (
               <Button
@@ -119,6 +128,14 @@ export const Header: React.FC = () => {
                   style={{ color: "#6B6668", fontWeight: "600" }}
                 >
                   企業を見る
+                </Button>
+              ) : null}
+              {currentUser ? (
+                <Button
+                  onClick={() => navigate("/culture")}
+                  style={{ color: "#6B6668", fontWeight: "600" }}
+                >
+                  組織文化について
                 </Button>
               ) : null}
               {currentUser ? (
