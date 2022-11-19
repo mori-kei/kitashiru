@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import { color } from "@mui/system";
 import { Card } from "@mui/material";
-import { doc, setDoc, } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 const Cards = styled.div`
@@ -70,17 +70,16 @@ const CardItem = styled.div`
     }
   }
 `;
-const handleNavigateCount = async ( collectionName, documentName,count) => {
+const handleNavigateCount = async (collectionName, documentName, count) => {
   const companyDoucumentRef = doc(db, collectionName, documentName);
   if (count >= 0) {
     await setDoc(
       companyDoucumentRef,
       {
-        count: ++count
+        count: ++count,
       },
       { merge: true }
     );
-   
   } else {
     await setDoc(
       companyDoucumentRef,
@@ -89,17 +88,17 @@ const handleNavigateCount = async ( collectionName, documentName,count) => {
       },
       { merge: true }
     );
-   
   }
 };
 export const FamilyData = ({ families }) => {
   return (
     <Cards>
       {families.map((family) => (
-        <CardItem key={family.id} onClick={() => handleNavigateCount("family",family.id,family.count)}>
+        <CardItem key={family.id}>
           <Link
             to={`/companies/${family.id}`}
             style={{ textDecoration: "none" }}
+            // onClick={() => handleNavigateCount("family",family.id,family.count)}
           >
             <div>
               <h3 style={{ color: "#34c759" }}>{family.companyName}</h3>
@@ -117,7 +116,12 @@ export const InnovationData = ({ innovations }) => {
   return (
     <Cards>
       {innovations.map((innovation) => (
-        <CardItem key={innovation.id} onClick={() => handleNavigateCount("innovation",innovation.id,innovation.count)}>
+        <CardItem
+          key={innovation.id}
+          // onClick={() =>
+          //   handleNavigateCount("innovation", innovation.id, innovation.count)
+          // }
+        >
           <Link
             to={`/companies/${innovation.id}`}
             style={{ textDecoration: "none" }}
@@ -138,7 +142,10 @@ export const MarketsData = ({ markets }) => {
   return (
     <Cards>
       {markets.map((market) => (
-        <CardItem key={market.id} onClick={() => handleNavigateCount("market",market.id,market.count)}>
+        <CardItem
+          key={market.id}
+          // onClick={() => handleNavigateCount("market", market.id, market.count)}
+        >
           <Link
             to={`/companies/${market.id}`}
             style={{ textDecoration: "none" }}
@@ -159,7 +166,12 @@ export const OfficialssData = ({ officials }) => {
   return (
     <Cards>
       {officials.map((officials) => (
-        <CardItem key={officials.id} onClick={() => handleNavigateCount("officials",officials.id,officials.count)}>
+        <CardItem
+          key={officials.id}
+          // onClick={() =>
+          //   handleNavigateCount("officials", officials.id, officials.count)
+          // }
+        >
           <Link
             to={`/companies/${officials.id}`}
             style={{ textDecoration: "none" }}

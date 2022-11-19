@@ -1,4 +1,4 @@
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import React from "react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -121,28 +121,34 @@ const Outer = styled.div`
 `;
 export const Company =  () => {
   const [companyData, setCompanyData] = useState({});
+  
   const { companyId } = useParams();
+  const [culture,setCulture] = useState("")
   useEffect(() => {
      
     const companyDocumentRef = doc(db, "family", companyId);
     getDoc(companyDocumentRef).then((documentSnapshot) => {
       if (documentSnapshot.exists()) {
         setCompanyData(documentSnapshot.data());
+        setCulture("family")
       } else {
         const companyDocumentRef = doc(db, "innovation", companyId);
         getDoc(companyDocumentRef).then((documentSnapshot) => {
           if (documentSnapshot.exists()) {
             setCompanyData(documentSnapshot.data());
+            setCulture("innovation")
           } else {
             const companyDocumentRef = doc(db, "market", companyId);
             getDoc(companyDocumentRef).then((documentSnapshot) => {
               if (documentSnapshot.exists()) {
                 setCompanyData(documentSnapshot.data());
+                setCulture("market")
               } else {
                 const companyDocumentRef = doc(db, "officials", companyId);
                 getDoc(companyDocumentRef).then((documentSnapshot) => {
                   if (documentSnapshot.exists()) {
                     setCompanyData(documentSnapshot.data());
+                    setCulture("officials")
                   }
                 });
               }
@@ -152,8 +158,33 @@ export const Company =  () => {
       }
     });
     console.log("test")
-    console.log(companyId)
+    console.log(companyData)
   }, []);
+useEffect(() => {
+  const getData = async() => {
+    
+    const companyDoucumentRef = doc(db,culture,companyId)
+    const count = companyData.count
+    if (count >= 0) {
+    await setDoc(
+      companyDoucumentRef,
+      {
+        count: count + 1,
+      },
+      { merge: true }
+    );
+  } else {
+    await setDoc(
+      companyDoucumentRef,
+      {
+        count: 1,
+      },
+      { merge: true }
+    );
+  }
+  }
+  getData()
+}, [culture])
 
   return (
     <>
