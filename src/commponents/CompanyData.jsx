@@ -96,7 +96,7 @@ export const FamilyData = ({ families }) => {
   return (
     <Cards>
       {families.map((family) => (
-        <CardItem key={family.id}>
+        <CardItem key={family.id} onClick={() => handleNavigateCount("family",family.id,family.count)}>
           <Link
             to={`/companies/${family.id}`}
             style={{ textDecoration: "none" }}
@@ -159,7 +159,7 @@ export const OfficialssData = ({ officials }) => {
   return (
     <Cards>
       {officials.map((officials) => (
-        <CardItem key={officials.id}>
+        <CardItem key={officials.id} onClick={() => handleNavigateCount("officials",officials.id,officials.count)}>
           <Link
             to={`/companies/${officials.id}`}
             style={{ textDecoration: "none" }}

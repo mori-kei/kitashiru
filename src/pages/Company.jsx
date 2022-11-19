@@ -123,6 +123,7 @@ export const Company =  () => {
   const [companyData, setCompanyData] = useState({});
   const { companyId } = useParams();
   useEffect(() => {
+     
     const companyDocumentRef = doc(db, "family", companyId);
     getDoc(companyDocumentRef).then((documentSnapshot) => {
       if (documentSnapshot.exists()) {
