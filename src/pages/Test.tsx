@@ -360,7 +360,6 @@ export const Test = () => {
     e.preventDefault();
     if (user) {
       const docUid = user.uid;
-      console.log(docUid);
       const userDocumentRef = doc(db, "users", user.uid);
       await setDoc(
         userDocumentRef,

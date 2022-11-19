@@ -1,8 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import { color } from "@mui/system";
 import { Card } from "@mui/material";
+import { doc, setDoc, } from "firebase/firestore";
+import { db } from "../firebase";
+
 const Cards = styled.div`
   @media (min-width: 460px) {
     width: 80%;
@@ -31,7 +34,7 @@ const CardItem = styled.div`
     }
     & h3 {
       font-size: 24px;
-      font-weight:600;
+      font-weight: 600;
       margin-bottom: 5px;
     }
     & p {
@@ -58,7 +61,7 @@ const CardItem = styled.div`
     }
     & h3 {
       font-size: 24px;
-      font-weight:600;
+      font-weight: 600;
       margin-bottom: 5px;
     }
     & p {
@@ -67,6 +70,28 @@ const CardItem = styled.div`
     }
   }
 `;
+const handleNavigateCount = async ( collectionName, documentName,count) => {
+  const companyDoucumentRef = doc(db, collectionName, documentName);
+  if (count >= 0) {
+    await setDoc(
+      companyDoucumentRef,
+      {
+        count: ++count
+      },
+      { merge: true }
+    );
+   
+  } else {
+    await setDoc(
+      companyDoucumentRef,
+      {
+        count: 1,
+      },
+      { merge: true }
+    );
+   
+  }
+};
 export const FamilyData = ({ families }) => {
   return (
     <Cards>
@@ -92,7 +117,7 @@ export const InnovationData = ({ innovations }) => {
   return (
     <Cards>
       {innovations.map((innovation) => (
-        <CardItem key={innovation.id}>
+        <CardItem key={innovation.id} onClick={() => handleNavigateCount("innovation",innovation.id,innovation.count)}>
           <Link
             to={`/companies/${innovation.id}`}
             style={{ textDecoration: "none" }}
@@ -113,7 +138,7 @@ export const MarketsData = ({ markets }) => {
   return (
     <Cards>
       {markets.map((market) => (
-        <CardItem key={market.id}>
+        <CardItem key={market.id} onClick={() => handleNavigateCount("market",market.id,market.count)}>
           <Link
             to={`/companies/${market.id}`}
             style={{ textDecoration: "none" }}
