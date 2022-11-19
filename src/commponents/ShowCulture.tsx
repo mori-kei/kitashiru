@@ -8,6 +8,7 @@ const ShowCultureComponent = styled.div`
     border-radius: 30px;
     box-sizing: border-box;
     padding: 20px 30px;
+
   }
   @media (min-width: 460px) {
     width: 1000px;
@@ -17,6 +18,9 @@ const ShowCultureComponent = styled.div`
     padding: 20px 30px;
     & p {
       font-size: 20px;
+    }
+    .sp{
+      display:none;
     }
   }
 `;
@@ -33,7 +37,7 @@ export const ShowCulture = ({ culture }: Props) => {
   return (
     <ShowCultureComponent>
       <p>
-        あなたの組織文化志向（好みの組織の雰囲気）は
+        あなたの組織文化志向<br className="sp"/> （好みの組織の雰囲気）は<br className="sp"/> 
         {culture == 1 ? <span>家族文化です</span> : null}
         {culture == 2 ? <span>イノベーション文化です</span> : null}
         {culture == 3 ? <span>マーケット文化です</span> : null}

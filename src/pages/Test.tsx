@@ -49,6 +49,9 @@ const Question = styled.div`
     & p {
       font-size: 16px;
     }
+    .exh1{
+      color:red;
+    }
   }
   @media (min-width: 460px) {
     max-width: 1280px;
@@ -61,6 +64,49 @@ const Question = styled.div`
     .show-value {
       margin-top: 20px;
     }
+    .exh1{
+      color:red;
+    }
+  }
+`;
+const ExQuestion = styled.div`
+  color: "#333";
+  margin: 0 auto;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  border-radius: 30px;
+  @media (max-width: 460px) {
+    margin-bottom: 30px;
+    width: 85%;
+    padding: 20px 15px;
+    box-shadow: #F06060 0px 5px 15px 0px;
+    & div {
+      margin-bottom: 10px;
+    }
+    & h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color:#F06060;
+    }
+    & p {
+      font-size: 16px;
+    }
+  }
+  @media (min-width: 460px) {
+    box-shadow: #F06060 0px 5px 15px 0px;
+    max-width: 1280px;
+    width: 80%;
+    margin-bottom: 20px;
+    padding: 20px 30px;
+    h1 {
+      color:#F06060;
+    }
+    p {
+      margin-top: 20px;
+    }
+    .show-value {
+      margin-top: 20px;
+    }
+ 
   }
 `;
 const ButtonBox = styled.div`
@@ -334,10 +380,9 @@ export const Test = () => {
 
   return (
     <Questions>
-      <Question>
+      <ExQuestion>
         <div>
           <h1>※これは解答例です</h1>
-          <h1>1.顕著にみられる特徴</h1>
           <p>
             指示系統によるしっかりとした上下関係重視というよりは、上司や先輩、または（将来）部下や後輩などともゆるやかで、フレンドリーな関係性が構築されている職場がいい。同僚や上司・部下は家族の延長のような存在であってほしいし、価値観や考えはお互いしっかり共有しておきたいと思う。
           </p>
@@ -386,7 +431,7 @@ export const Test = () => {
           />
         </div>
         <p className="show-value">あなたが入力したこの質問の合計値:100</p>
-      </Question>
+      </ExQuestion>
       <Question>
         <div>
           <h1>1.顕著にみられる特徴</h1>
