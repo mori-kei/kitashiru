@@ -198,11 +198,3 @@ export const CompanyIndex = () => {
   );
 };
 
-// const familyComponent = () => {
-//   families.map((family) => (
-//     <div key={family.id}>
-//       {family.companyName}
-//       <Link to={`/companies/${family.id}`}>{family.id}</Link>
-//     </div>
-//   ))
-// }

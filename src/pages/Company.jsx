@@ -119,9 +119,8 @@ const Outer = styled.div`
     }
   }
 `;
-export const Company = () => {
+export const Company =  () => {
   const [companyData, setCompanyData] = useState({});
-  // const { companyId } = useParams<{ companyId: string }>();
   const { companyId } = useParams();
   useEffect(() => {
     const companyDocumentRef = doc(db, "family", companyId);
@@ -151,6 +150,8 @@ export const Company = () => {
         });
       }
     });
+    console.log("test")
+    console.log(companyId)
   }, []);
 
   return (
