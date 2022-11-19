@@ -16,6 +16,7 @@ import { CompanyIndex } from "./pages/CompanyIndex";
 import { NoMatch } from "./pages/NoMatch";
 import { Footer } from "./commponents/Footer";
 import { Culture } from "./pages/Culture";
+import { PrivacyPolicy } from "./pages/PrivacyPolicy";
 function App() {
   return (
     <>
@@ -26,6 +27,7 @@ function App() {
             <Route path="/signin" element={<SignIn />} />
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/privacypolicy" element={<PrivacyPolicy/>} />
             <Route path="test" element={<PrivateRoute children={<Test />} />} />
             <Route path="culture" element={<PrivateRoute children={<Culture/>} />} />
             <Route path="*" element={<PrivateRoute children={<NoMatch />} />} />
